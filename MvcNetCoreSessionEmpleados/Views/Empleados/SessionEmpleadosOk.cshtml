@@ -1,0 +1,16 @@
+﻿@model List<Empleado>
+
+<h1 style="color:green">Session Empleados OK</h1>
+<p><a asp-controller="Empleados" asp-action="EmpleadosAlmacenadosOk">Empleados almacenados</a></p>
+
+<ul class="list-group">
+	@foreach (Empleado empleado in Model)
+	{
+		<li class="list-group-item list-group-item-success">
+			@empleado.Apellido
+			<a asp-controller="Empleados" asp-action="SessionEmpleadosOk" asp-route-idEmpleado="@empleado.IdEmpleado">
+				Almacenar empleado
+			</a>
+		</li>
+	}
+</ul>
