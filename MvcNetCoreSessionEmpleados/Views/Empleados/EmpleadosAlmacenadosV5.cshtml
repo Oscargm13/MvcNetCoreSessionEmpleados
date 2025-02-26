@@ -1,0 +1,53 @@
+﻿@model List<Empleado>
+
+@{
+    ViewData["Title"] = "EmpleadosAlmacenadosV5";
+}
+
+<h1 style="color:blue">Empleados Almacenados Session V5</h1>
+
+@if (Context.Session.GetString("IDSEMPLEADOS") == null)
+{
+    <h2 style="color:red">
+        No existen empleados en Session
+    </h2>
+}
+
+<p>
+    <a asp-controller="Empleados" asp-action="SessionEmpleadosV5">
+        Volver a almacenar empleados V5
+    </a>
+</p>
+@if (Model != null)
+{
+    <table class="table table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>Apellido</th>
+                <th>Oficio</th>
+                <th>Salario</th>
+                <th>Departamento</th>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Empleado emp in Model)
+            {
+                <tr>
+                    <td>@emp.Apellido</td>
+                    <td>@emp.Oficio</td>
+                    <td>@emp.Salario</td>
+                    <td>@emp.idDepartamento</td>
+                    <td>
+                        <a asp-controller="Empleados"
+                           asp-action="EmpleadosAlmacenadosV5"
+                           asp-route-ideliminar="@emp.IdEmpleado">
+                            Eliminar Session
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

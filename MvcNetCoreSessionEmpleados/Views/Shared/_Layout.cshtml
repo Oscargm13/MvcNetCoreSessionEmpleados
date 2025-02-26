@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    // NECESITAMOS SESSION PARA SABER EL DIBUJO A REALIZAR
+    List<int> ids = Context.Session.GetObject<List<int>>("IDSEMPLEADOS");
+    //NECESITAMOS MEMORYCACHE PARA LOS DIBUJOS
+    List<Empleado> favoritos = memoryCache.Get<List<Empleado>>("FAVORITOS");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,6 +44,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="SessionEmpleadosV5">Session empleados v5</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Empleados" asp-action="EmpleadosFavoritos">Favoritos</a>
+                        </li>
+                        <li class="nav-item">
+                            @if(favoritos != null){
+                                <h3 style="background-color: lightgreen">Favoritos almacenados: @favoritos.Count</h3>
+                            }
+                            @if(ids != null){
+                                <h3 style="background-color: yellow; color:blue">Empleados Session: @ids.Count</h3>
+                            }
                         </li>
                     </ul>
                 </div>
